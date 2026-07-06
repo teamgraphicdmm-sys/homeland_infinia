@@ -28,10 +28,24 @@ get_header();
         z-index: 2;
 }
 
+
 .about-page-wrap .container {
     max-width: 1400px;
     margin: 0 auto;
-    padding: 0 2rem;
+    padding: 0 1rem;
+}
+
+footer {
+    margin-top: 0px;
+    background-color:white;
+    max-width: 100%;
+}
+.disclaimer-text {
+    font-size: clamp(0.65rem, 1.2vw, 0.72rem);
+    color: #000000c2;
+    max-width:1100px;
+    margin: 0 auto;
+    padding: 1rem 0rem;
 }
 
 .about-page-wrap .section-subtitle, 
@@ -346,6 +360,11 @@ get_header();
     grid-auto-flow: row;
 }
 }
+@media (max-width:768px) {
+    .about-grid {
+    display: block;
+    }
+}
 </style>
 <video class="bg-video-layer bg-video-dim" src="<?php echo esc_url(get_template_directory_uri() . '/assets/video/homeland_bg_video.mp4'); ?>" autoplay loop muted playsinline webkit-playsinline></video>
 <div class="about-page-wrap">
@@ -367,7 +386,7 @@ get_header();
                 </div>
 
                 <div class="about-image">
-                    <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/homeland-heights.webp'); ?>" alt="Homeland Office Space">
+                    <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/logo.jpeg'); ?>" alt="Homeland Office Space">
                 </div>
             </div>
         </div>
@@ -438,7 +457,7 @@ get_header();
             <div class="story-split-layout">
                 
                 <div class="story-single-image-wrapper">
-                    <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/about-us-header.png'); ?>" alt="Homeland Managed Modern Architecture">
+                    <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/homeland-heights.webp'); ?>" alt="Homeland Managed Modern Architecture">
                 </div>
 
                 <div class="story-scroll-container">

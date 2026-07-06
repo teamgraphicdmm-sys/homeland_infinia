@@ -2,6 +2,7 @@ wp-config.php
 .htaccess
 nginx.conf
 
+homeland_infinia.zip
 /wp-admin/
 /wp-includes/
 /index.php

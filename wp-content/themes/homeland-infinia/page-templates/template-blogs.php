@@ -17,11 +17,49 @@ $blog_query = new WP_Query(array(
         margin-top: 0px;
     }
 
+
+        footer {
+    width: 100%;
+    max-width: 1100px;
+    text-align: center;
+    z-index: 100;
+    position: fixed;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    padding-top: 20px;
+    margin-top: 30px;
+    transition: opacity 0.5s ease;
+    margin-top: -100px;
+    position: fixed;
+    /* margin-left: auto; */
+    /* margin-right: auto; */
+    margin: auto;
+    margin-top: -100px;
+    margin-left: 15%;}
    @media (max-width: 768px) {
         #app-container{
             min-height: 80vh;
         }
+
+        footer {
+    width: 100%;
+    max-width: 1100px;
+    text-align: center;
+    z-index: 100;
+    position: fixed;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    padding-top: 20px;
+    margin-top: 30px;
+    transition: opacity 0.5s ease;
+    margin-top: -100px;
+    position: fixed;
+    /* margin-left: auto; */
+    /* margin-right: auto; */
+    margin: auto;
+    margin-top: 0;
+    margin-left: unset;
+}
     }
+
 </style>
 <video class="bg-video-layer bg-video-dim" src="<?php echo esc_url(get_template_directory_uri() . '/assets/video/homeland_bg_video.mp4'); ?>" autoplay loop muted playsinline webkit-playsinline></video>
 
