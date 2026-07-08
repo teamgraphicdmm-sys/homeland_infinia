@@ -13,10 +13,38 @@ $blog_query = new WP_Query(array(
 ));
 ?>
 <style>
+    body {
+        background:white;
+    }
     footer {
         margin-top: 0px;
     }
 
+    .bg-video-layer{
+        display:none;
+    }
+
+    header {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 1600px;
+    max-width: 100%;
+    background: linear-gradient(180deg, rgb(0 0 0) 0%, rgb(5 5 5 / 86%) 100%);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom-left-radius: 24px;
+    border-bottom-right-radius: 24px;
+    border: 1px solid rgb(255 255 255 / 44%);
+    border-top: none;
+    padding: 14px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+    transition: opacity 0.5s ease;
+}   
 
         footer {
     width: 100%;
@@ -59,6 +87,9 @@ $blog_query = new WP_Query(array(
     margin-left: unset;
 }
     }
+    .disclaimer-text {
+            color: rgb(0 0 0 / 53%);
+    }
 
 </style>
 <video class="bg-video-layer bg-video-dim" src="<?php echo esc_url(get_template_directory_uri() . '/assets/video/homeland_bg_video.mp4'); ?>" autoplay loop muted playsinline webkit-playsinline></video>
@@ -67,7 +98,7 @@ $blog_query = new WP_Query(array(
     <div class="text-block" style="max-width: 800px;">
         <h1 class="section-title">Architectural Perspectives!</h1>
         <div class="divider-logo">
-            <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/homeland-logo-icon.png'); ?>" alt="" style="height:25px;">
+            <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/homeland-logo-icon.png'); ?>" alt="" style="height:25px;    filter: invert(1);">
         </div>
     </div>
 

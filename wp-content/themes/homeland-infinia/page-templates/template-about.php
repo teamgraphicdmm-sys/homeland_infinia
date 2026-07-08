@@ -21,7 +21,7 @@ get_header();
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     color: var(--text-dark);
     line-height: 1.6;
-    background-color: #ffffff00;
+    background-color: #ffffff;
     overflow-x: hidden;
         padding-top: 10%;
         position: relative;
@@ -48,6 +48,28 @@ footer {
     padding: 1rem 0rem;
 }
 
+    header {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 1600px;
+    max-width: 100%;
+    background: linear-gradient(180deg, rgb(0 0 0) 0%, rgb(5 5 5 / 86%) 100%);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom-left-radius: 24px;
+    border-bottom-right-radius: 24px;
+    border: 1px solid rgb(255 255 255 / 44%);
+    border-top: none;
+    padding: 14px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+    transition: opacity 0.5s ease;
+}   
+
 .about-page-wrap .section-subtitle, 
 .about-page-wrap .small-title {
     display: block;
@@ -64,7 +86,7 @@ footer {
     padding: 6rem 0;
     background-color: #ffffff00;
     .about-text{
-            color: #e3e3e3;
+         color: var(--text-muted);
     }
 }
 
@@ -98,7 +120,7 @@ footer {
     height: 500px;
     object-fit: cover;
     border-radius: 12px;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+       box-shadow: 0 13px 30px rgb(0 0 0 / 23%);
     display: block;
 }
 
@@ -106,6 +128,7 @@ footer {
 .core-values {
     padding: 6rem 0;
     background-color: var(--bg-light);
+    box-shadow: 0 -6px 7px -2px rgb(0 0 0 / 8%);
 }
 
 .values-split {

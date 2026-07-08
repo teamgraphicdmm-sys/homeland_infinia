@@ -4,6 +4,36 @@
  */
 get_header();
 ?>
+<style>
+        header {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 1600px;
+    max-width: 100%;
+    background: linear-gradient(180deg, rgb(0 0 0) 0%, rgb(5 5 5 / 86%) 100%);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom-left-radius: 24px;
+    border-bottom-right-radius: 24px;
+    border: 1px solid rgb(255 255 255 / 44%);
+    border-top: none;
+    padding: 14px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+    transition: opacity 0.5s ease;
+}   
+.bg-video-layer {
+    display:none;
+}
+body{
+    background:white;
+}
+.disclaimer-text {display:none;}
+</style>
 <video class="bg-video-layer bg-video-dim" src="<?php echo esc_url(get_template_directory_uri() . '/assets/video/homeland_bg_video.mp4'); ?>" autoplay loop muted playsinline webkit-playsinline></video>
 
 <main class="contact-main-layout">
