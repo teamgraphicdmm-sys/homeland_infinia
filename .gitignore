@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 wp-config.php
 .htaccess
 nginx.conf
@@ -28,4 +29,37 @@ wp-content/backups/
 *.sql
 .DS_Store
 Thumbs.db
+=======
+wp-config.php
+.htaccess
+nginx.conf
+
+homeland_infinia.zip
+/wp-admin/
+/wp-includes/
+/index.php
+/wp-activate.php
+/wp-blog-header.php
+/wp-comments-post.php
+/wp-cron.php
+/wp-links-opml.php
+/wp-load.php
+/wp-login.php
+/wp-mail.php
+/wp-settings.php
+/wp-signup.php
+/wp-trackback.php
+/xmlrpc.php
+
+wp-content/uploads/
+wp-content/cache/
+wp-content/upgrade/
+wp-content/backups/
+
+
+*.log
+*.sql
+.DS_Store
+Thumbs.db
+>>>>>>> f878f8616f99a8acd03a72c824bd5a8b2c2c115b
 node_modules/
