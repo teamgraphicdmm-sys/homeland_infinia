@@ -4,6 +4,21 @@
  */
 get_header();
 ?>
+<style>
+
+    h1, .section-title {
+    font-family: "Aboreto", system-ui;
+    font-size: 65px;
+    font-weight: 400;
+    letter-spacing: 4px;
+    line-height: 1.1;
+    text-transform: uppercase;
+       background: linear-gradient(135deg, #ffffff 40%, #fffcfc 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+</style>
 <video class="bg-video-layer" src="<?php echo esc_url(get_template_directory_uri() . '/assets/video/homeland_bg_video.mp4'); ?>" autoplay loop muted playsinline webkit-playsinline></video>
 
 <div id="app-container">
