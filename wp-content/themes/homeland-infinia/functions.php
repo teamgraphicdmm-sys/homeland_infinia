@@ -25,11 +25,11 @@ add_action('after_setup_theme', 'hi_theme_setup');
  * Fallback nav if no menu is assigned yet in Appearance > Menus
  */
 function hi_default_menu_fallback() {
-    echo '<a href="' . esc_url(home_url('/about-us/')) . '" class="nav-link" '.(is_page('about-us') ? 'style="color: #d1ac7c;"' : '') . '>About Us</a>';
+    echo '<a href="' . esc_url(home_url('/about-us/')) . '" class="nav-link" '.(is_page('about-us') ? 'style="color: #d1ac7c;font-weight: 600;"' : '') . '>About Us</a>';
     echo '<span class="nav-divider">|</span>';
-    echo '<a href="' . esc_url(home_url('/blog/')) . '" class="nav-link" '.(is_page('blog') ? 'style="color: #d1ac7c;"' : '') . '>Blog</a>';
+    echo '<a href="' . esc_url(home_url('/blog/')) . '" class="nav-link" '.(is_page('blog') ? 'style="color: #d1ac7c;font-weight: 600;"' : '') . '>Blog</a>';
     echo '<span class="nav-divider">|</span>';
-    echo '<a href="' . esc_url(home_url('/contact/')) . '" class="nav-link" '.(is_page('contact-us') ? 'style="color: #d1ac7c;"' : '') . '>Contact Us</a>';
+    echo '<a href="' . esc_url(home_url('/contact/')) . '" class="nav-link" '.(is_page('contact-us') ? 'style="color: #d1ac7c;font-weight: 600;"' : '') . '>Contact Us</a>';
 }
 
 /* ---------------------------------------------------

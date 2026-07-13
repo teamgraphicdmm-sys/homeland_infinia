@@ -24,7 +24,7 @@ $blog_query = new WP_Query(array(
         display:none;
     }
 
-    header {
+    /* header {
     position: absolute;
     top: 0;
     left: 50%;
@@ -44,7 +44,7 @@ $blog_query = new WP_Query(array(
     align-items: center;
     z-index: 100;
     transition: opacity 0.5s ease;
-}   
+}    */
 
         footer {
     width: 100%;
