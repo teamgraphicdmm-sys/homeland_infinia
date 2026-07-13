@@ -23,13 +23,47 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
     <?php wp_head(); ?>
+    <style>
+     <?php if ( ! is_front_page() && ! is_home() ) : ?>
+        header::before {
+            content: '';
+            background: url('<?php echo esc_url( get_template_directory_uri() . '/assets/images/image-header-bg.png' ); ?>') no-repeat center / cover;
+            height: 100%;
+            width: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: -2; /* Puts background image BEHIND text and navigation items */
+                /* backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px); */
+            border-bottom-left-radius: 24px;
+            border-bottom-right-radius: 24px;
+            /* box-shadow: 0 10px 10px rgb(0 0 0 / 18%); */
+        }
+                header::after {
+            content: '';
+            height: 100%;
+            width: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: -1; /* Puts background image BEHIND text and navigation items */
+                 background: linear-gradient(180deg, rgb(32 28 24 / 62%) 0%, rgb(20 18 16 / 22%) 100% 100%);
+                backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom-left-radius: 24px;
+            border-bottom-right-radius: 24px;
+            /* box-shadow: 0 10px 10px rgb(0 0 0 / 18%); */
+        }
+  <?php endif; ?>
+    </style>
 </head>
 <body <?php body_class(); ?>>
 <!-- 
 <div class="ambient-glow-1"></div>
 <div class="ambient-glow-2"></div> -->
 
-<header id="site-header">
+<header id="site-header" ?>
     <a href="<?php echo esc_url(home_url('/')); ?>" id="homeland-logo" class="brand-logo-link">
         <img class="brand-logo-img"  src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/homeland-logo.png'); ?>" alt="Homeland Logo">
     </a>

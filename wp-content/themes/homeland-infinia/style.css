@@ -147,31 +147,45 @@ header {
 @media (max-width: 768px) {
     .hamburger-btn { display: flex; }
 
-    .header-right {
-        position: absolute;
-        top: 100%;
-        left: 0;
-        width: 100%;
-        flex-direction: column;
-        align-items: center;
-        gap: 0;
-        background: rgb(11 11 15 / 96%);
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
-        border-bottom-left-radius: 24px;
-        border-bottom-right-radius: 24px;
-        max-height: 0;
-        overflow: hidden;
-        opacity: 0;
-        pointer-events: none;
-        transition: max-height 0.35s ease, opacity 0.3s ease;
-    }
-    .header-right.is-open {
-        max-height: 300px;
+.header-right {
+    position: absolute;
+    top: 81%; /* Matches your open position */
+    left: 0;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+    
+    /* Background & Effects */
+    background: linear-gradient(180deg, rgba(32, 28, 24, 0.43) 0%, rgba(20, 18, 16, 0.22) 100%);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom-left-radius: 24px;
+    border-bottom-right-radius: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.44);
+    transform: translateX(-100%);
+    opacity: 0;
+    pointer-events: none;
+     height: 100vh;
+    transition: transform 1s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+}
+
+.header-right.is-open {
+    /* Slide into place (0) and make visible */
+        transform: translateX(0);
         opacity: 1;
         pointer-events: auto;
         padding: 10px 0 22px;
-    }
+        height: 100vh;
+        z-index: 10000000;
+        background:#000000d1;
+        top: 0;
+        display: flex;
+        width: 80%;
+        justify-content: flex-start;
+                border-bottom-left-radius: 0px;
+        border-bottom-right-radius: 0px;
+}
     .header-right .nav-link {
         width: 100%;
         text-align: center;
@@ -180,6 +194,9 @@ header {
     .header-right .nav-divider { display: none; }
 }
 
+    .header-right.is-open .nav-link {
+        text-align: left;
+    }
 .nav-link {
     color: #ffffff;
     text-decoration: none;
@@ -320,7 +337,7 @@ footer{
     width: 100%;
     max-width: 1100px;
     text-align: center;
-    z-index: 100;
+    z-index: 99;
     border-top: 1px solid rgba(255, 255, 255, 0.05);
     padding-top: 20px;
     margin-top: 30px;
@@ -366,7 +383,7 @@ main.contact-main-layout {
 .info-side p { color: #000000; font-size: clamp(0.95rem, 1.8vw, 1.05rem); line-height: 1.6; margin-bottom: 40px; font-weight: 300; }
 .contact-details { display: flex; flex-direction: column; gap: 24px; }
 .detail-item { font-size: clamp(0.85rem, 1.5vw, 0.95rem);  color: #3d3a3a;  line-height: 1.5; }
-.detail-item strong { color: #000000; display: block; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 6px; }
+.detail-item strong { color: var(--accent); display: block; font-size: 0.95rem; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 6px; }
 .detail-item a {     color: #3d3a3a; text-decoration: none; }
 .detail-item a:hover { color: var(--accent); }
 .detail-item img { vertical-align: middle; margin-right: 4px; filter: invert(1);}
@@ -555,3 +572,5 @@ main.contact-main-layout {
     .milestone-strip { flex-direction: column; }
     .milestone { min-width: 100%; }
 }
+
+

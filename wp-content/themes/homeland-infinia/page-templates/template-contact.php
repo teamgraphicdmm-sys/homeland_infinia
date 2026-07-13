@@ -5,7 +5,7 @@
 get_header();
 ?>
 <style>
-        header {
+        /* header {
     position: absolute;
     top: 0;
     left: 50%;
@@ -25,7 +25,7 @@ get_header();
     align-items: center;
     z-index: 100;
     transition: opacity 0.5s ease;
-}   
+}    */
 .bg-video-layer {
     display:none;
 }
