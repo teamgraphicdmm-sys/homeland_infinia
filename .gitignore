@@ -62,4 +62,8 @@ wp-content/backups/
 .DS_Store
 Thumbs.db
 >>>>>>> f878f8616f99a8acd03a72c824bd5a8b2c2c115b
-node_modules/
+node_modules/wp-content/plugins/wordpress-seo/
+wp-content/plugins/wp-file-manager/
+llms.txt
+robots.txt
+wp-content/plugins/wordpress-seo/
