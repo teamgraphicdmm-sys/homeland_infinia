@@ -186,6 +186,7 @@ header {
                 border-bottom-left-radius: 0px;
         border-bottom-right-radius: 0px;
 }
+
     .header-right .nav-link {
         width: 100%;
         text-align: center;
@@ -196,6 +197,7 @@ header {
 
     .header-right.is-open .nav-link {
         text-align: left;
+        font-size:1.5rem;
     }
 .nav-link {
     color: #ffffff;
