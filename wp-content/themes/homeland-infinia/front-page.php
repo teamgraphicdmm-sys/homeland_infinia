@@ -27,7 +27,7 @@ get_header();
     display: block;
     font-size: clamp(16px, 2.5vw, 25px);
     margin-bottom: -1%; 
-    margin-left: -47%;
+    margin-left: -45%;
 }
 @media (max-width: 992px) {
     .small-title {
