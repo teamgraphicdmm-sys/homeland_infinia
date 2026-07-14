@@ -4,7 +4,6 @@
     <meta charset="<?php bloginfo('charset'); ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="index, follow">
-
     <meta property="og:type" content="website">
     <meta property="og:title" content="<?php bloginfo('name'); ?>">
     <meta property="og:url" content="<?php echo esc_url(home_url('/')); ?>">
@@ -15,7 +14,6 @@
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-
     gtag('config', 'G-F3FP2QJQSM');
     </script>
 
