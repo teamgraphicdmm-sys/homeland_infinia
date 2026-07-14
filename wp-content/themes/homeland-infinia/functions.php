@@ -32,6 +32,20 @@ function hi_default_menu_fallback() {
     echo '<a href="' . esc_url(home_url('/contact/')) . '" class="nav-link" '.(is_page('contact-us') ? 'style="color: #d1ac7c;font-weight: 600;"' : '') . '>Contact Us</a>';
 }
 
+
+function add_homepage_meta_tags() {
+    // Only target the main homepage
+    if ( is_front_page() ) {
+        $meta_title = "Luxury Apartments in New Chandigarh | Homeland Infinia";
+        $meta_description = "Discover Homeland Infinia, offering luxury apartments in New Chandigarh. Experience premium residences, modern amenities, & elegant living.";
+
+        echo '<title>' . esc_html( $meta_title ) . '</title>' . "\n";
+        echo '<meta name="description" content="' . esc_attr( $meta_description ) . '">' . "\n";
+    }
+}
+// Automatically inserts these into header.php
+add_action( 'wp_head', 'add_homepage_meta_tags', 1 );
+
 /* ---------------------------------------------------
  * Enqueue styles & scripts
  * ------------------------------------------------- */
