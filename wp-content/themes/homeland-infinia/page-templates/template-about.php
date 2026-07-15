@@ -128,6 +128,12 @@ footer {
     }
 }
 
+@media (min-width: 993px) and  (max-width: 1024px){
+    .values-list-right {
+           grid-auto-flow: row !important;
+    }
+}
+
 .values-list-right {
     display: grid;
     gap: 2.5rem;
@@ -427,18 +433,19 @@ footer {
         <div class="container">
             <div class="values-split">
                 <div class="values-sticky-left">
-                    <span class="section-subtitle">Our Mission & Values</span>
-                    <h2 style="font-size: 42px; line-height: 1.2; margin-top: 10px; margin-bottom: 20px; color: var(--primary-color);">Visionary Design</h2>
-                    <p class="about-text" style="font-size: 16px;">Every residence is thoughtfully planned with contemporary architecture, spacious layouts, premium finishes, and breathtaking grandstand views, creating homes that are both timeless and functional.</p>
+                    <span class="section-subtitle">Mission & Values</span>
+                    <h2 style="font-size: 42px; line-height: 1.2; margin-top: 10px; margin-bottom: 20px; color: var(--primary-color);">Our Mission & Values</h2>
+                    <!-- <p class="about-text" style="font-size: 16px;"></p> -->
                 </div>
 
                 <div class="values-list-right ">
-                    <div class="value-row none" >
-                        <div class="value-icon none" >⚡</div>
+                    <div class="value-row " >
+                        <div class="value-icon " >⚡</div>
                         <div class="value-info">
-                            <h3></h3>
+                            <h3>Visionary Design</h3>
                             <p>
-</p>
+                                Every residence is thoughtfully planned with contemporary architecture, spacious layouts, premium finishes, and breathtaking grandstand views, creating homes that are both timeless and functional.
+                            </p>
                         </div>
                     </div>
                     <div class="value-row">
@@ -446,7 +453,7 @@ footer {
                         <div class="value-info">
                             <h3>Uncompromising Quality</h3>
                             <p>From construction excellence to carefully selected materials, every aspect of Homeland Infinia reflects our commitment to delivering superior craftsmanship and lasting value
-</p>
+                            </p>
                         </div>
                     </div>
                     <div class="value-row">
@@ -454,7 +461,7 @@ footer {
                         <div class="value-info">
                             <h3>Lifestyle Beyond Expectations</h3>
                             <p>Experience an elevated way of life with world-class amenities, landscaped open spaces, wellness facilities, recreational zones, and community-centric living designed for every generation.
-</p>
+                            </p>
                         </div>
                     </div>
                     <div class="value-row">
@@ -462,7 +469,7 @@ footer {
                         <div class="value-info">
                             <h3>Trust & Transparency</h3>
                             <p>Built on the legacy of Homeland Group, we uphold the highest standards of integrity, timely delivery, and customer-first service, ensuring complete confidence throughout your homeownership journey.
-</p>
+                            </p>
                         </div>
                     </div>
                 </div>
