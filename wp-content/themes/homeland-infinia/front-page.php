@@ -6,6 +6,13 @@ get_header();
 ?>
 <style>
 
+/*
+* Prefixed by https://autoprefixer.github.io
+* PostCSS: v8.5.15,
+* Autoprefixer: v10.5.0
+* Browsers: last 4 version
+*/
+
     h1, .section-title {
     font-family: "Aboreto", system-ui;
     font-size: 65px;
@@ -57,7 +64,7 @@ get_header();
         </div>
 
         <div class="button-block">
-            <a href="<?php echo esc_url(get_permalink(get_page_by_path('tour'))); ?>" class="tour-btn" id="tour-btn">
+            <a href="<?php echo esc_url(get_template_directory_uri() . '/virtualtour/index.html'); ?>" class="tour-btn" id="tour-btn">
                 Click Here for a Virtual Tour
                 <span class="arrow">&rarr;</span>
             </a>
