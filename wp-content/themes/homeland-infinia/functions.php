@@ -231,6 +231,122 @@ function hi_chatbot_seed_data() {
 /* ---------------------------------------------------
  * AJAX: Contact form submission
  * ------------------------------------------------- */
+// function hi_handle_contact_submit() {
+//     check_ajax_referer('hi_contact_nonce', 'nonce');
+
+//     global $wpdb;
+//     $name    = sanitize_text_field($_POST['name'] ?? '');
+//     $email   = sanitize_email($_POST['email'] ?? '');
+//     $mobile  = sanitize_text_field($_POST['mobile'] ?? '');
+//     $subject = sanitize_text_field($_POST['subject'] ?? '');
+//     $message = sanitize_textarea_field($_POST['message'] ?? '');
+
+//     if (!$name || !$email || !$mobile || !$subject || !$message) {
+//         wp_send_json_error(array('message' => 'Transmission failed. Please ensure all fields are correctly populated.'));
+//     }
+
+//     $table = $wpdb->prefix . 'hi_inquiries';
+//     $ok = $wpdb->insert($table, array(
+//         'name'    => $name,
+//         'email'   => $email,
+//         'mobile'  => $mobile,
+//         'subject' => $subject,
+//         'message' => $message,
+//         'status'  => 'Pending',
+//     ));
+
+//     if ($ok) {
+//         $admin_email = get_option('admin_email');
+//         $body = "New inquiry from $name ($email, $mobile)\nSubject: $subject\n\n$message";
+//         wp_mail($admin_email, 'New Website Inquiry - ' . $subject, $body);
+
+//         wp_send_json_success(array('message' => 'Thank you! Your inquiry has been transmitted successfully.'));
+//     }
+
+//     wp_send_json_error(array('message' => 'Transmission failed. Please ensure all fields are correctly populated.'));
+// }
+// add_action('wp_ajax_hi_submit_contact', 'hi_handle_contact_submit');
+// add_action('wp_ajax_nopriv_hi_submit_contact', 'hi_handle_contact_submit');
+
+
+
+/* =====================================================
+ * Contact Form Handler + Dynamic Notification Emails
+ * ===================================================== */
+
+/* ---------------------------------------------------
+ * 1. Settings: Register + Sanitize
+ * ------------------------------------------------- */
+function hi_register_contact_settings() {
+    register_setting('hi_contact_settings_group', 'hi_contact_notify_emails', array(
+        'sanitize_callback' => 'hi_sanitize_notify_emails',
+        'default'           => get_option('admin_email'),
+    ));
+}
+add_action('admin_init', 'hi_register_contact_settings');
+
+function hi_sanitize_notify_emails($input) {
+    $emails = array_map('trim', explode(',', $input));
+    $valid  = array();
+
+    foreach ($emails as $email) {
+        if (is_email($email)) {
+            $valid[] = sanitize_email($email);
+        }
+    }
+
+    // Fallback to admin email if nothing valid was entered
+    if (empty($valid)) {
+        $valid[] = get_option('admin_email');
+    }
+
+    return implode(', ', $valid);
+}
+
+/* ---------------------------------------------------
+ * 2. Settings: Admin Menu Page
+ * ------------------------------------------------- */
+function hi_add_contact_settings_page() {
+    add_options_page(
+        'Contact Form Emails',
+        'Contact Form Emails',
+        'manage_options',
+        'hi-contact-settings',
+        'hi_render_contact_settings_page'
+    );
+}
+add_action('admin_menu', 'hi_add_contact_settings_page');
+
+function hi_render_contact_settings_page() {
+    ?>
+    <div class="wrap">
+        <h1>Contact Form Notification Emails</h1>
+        <form method="post" action="options.php">
+            <?php settings_fields('hi_contact_settings_group'); ?>
+            <table class="form-table">
+                <tr valign="top">
+                    <th scope="row">Recipient Email(s)</th>
+                    <td>
+                        <input type="text"
+                               name="hi_contact_notify_emails"
+                               value="<?php echo esc_attr(get_option('hi_contact_notify_emails', get_option('admin_email'))); ?>"
+                               class="regular-text" />
+                        <p class="description">
+                            Separate multiple emails with commas. e.g.
+                            <code>sales@example.com, support@example.com</code>
+                        </p>
+                    </td>
+                </tr>
+            </table>
+            <?php submit_button(); ?>
+        </form>
+    </div>
+    <?php
+}
+
+/* ---------------------------------------------------
+ * 3. AJAX: Contact form submission
+ * ------------------------------------------------- */
 function hi_handle_contact_submit() {
     check_ajax_referer('hi_contact_nonce', 'nonce');
 
@@ -255,10 +371,135 @@ function hi_handle_contact_submit() {
         'status'  => 'Pending',
     ));
 
+    // if ($ok) {
+    //     // Pull dynamic recipient list from Settings → Contact Form Emails
+    //     $to_raw = get_option('hi_contact_notify_emails', get_option('admin_email'));
+    //     $to     = array_map('trim', explode(',', $to_raw));
+
+    //     $email_subject = 'New Inquiry From Homeland Infinia Website- ' . $subject;
+
+    //     $email_body  = "<h2>New Inquiry Received From Contact From</h2>";
+    //     $email_body .= "<p><strong>Name:</strong> {$name}</p>";
+    //     $email_body .= "<p><strong>Email:</strong> {$email}</p>";
+    //     $email_body .= "<p><strong>Mobile:</strong> {$mobile}</p>";
+    //     $email_body .= "<p><strong>Subject:</strong> {$subject}</p>";
+    //     $email_body .= "<p><strong>Message:</strong><br>" . nl2br($message) . "</p>";
+
+    //     $headers = array(
+    //         'Content-Type: text/html; charset=UTF-8',
+    //         'Reply-To: ' . $name . ' <' . $email . '>',
+    //     );
+
+    //     wp_mail($to, $email_subject, $email_body, $headers);
+
+    //     wp_send_json_success(array('message' => 'Thank you! Your inquiry has been transmitted successfully.'));
+    // }
+
     if ($ok) {
-        $admin_email = get_option('admin_email');
-        $body = "New inquiry from $name ($email, $mobile)\nSubject: $subject\n\n$message";
-        wp_mail($admin_email, 'New Website Inquiry - ' . $subject, $body);
+        // Pull dynamic recipient list from Settings → Contact Form Emails
+        $to_raw = get_option('hi_contact_notify_emails', get_option('admin_email'));
+        $to     = array_map('trim', explode(',', $to_raw));
+
+        $email_subject = 'New Inquiry From Homeland Infinia Website - ' . $subject;
+
+        $email_body = '
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+        </head>
+            <body style="margin:0; padding:0; background-color:#f4f4f4; font-family: Arial, Helvetica, sans-serif;">
+                <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color:#f4f4f4; padding:30px 0;">
+                    <tr>
+                        <td align="center">
+                            <table role="presentation" width="600" cellpadding="0" cellspacing="0" style="background-color:#ffffff; border-radius:8px; overflow:hidden; box-shadow:0 2px 8px rgba(0,0,0,0.08);">
+
+                                <!-- Header -->
+                                <tr>
+                                    <td style="background-color:#1a1a1a; padding:28px 32px;">
+                                        <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
+                                            <tr>
+                                                <td>
+                                                    <h1 style="margin:0; color:#ffffff; font-size:20px; letter-spacing:1px; font-weight:600;">HOMELAND INFINIA</h1>
+                                                    <p style="margin:4px 0 0; color:#c9a875; font-size:12px; letter-spacing:2px; text-transform:uppercase;">New Website Inquiry</p>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+
+                                <!-- Subject strip -->
+                                <tr>
+                                    <td style="background-color:#c9a875; padding:14px 32px;">
+                                        <p style="margin:0; color:#1a1a1a; font-size:14px; font-weight:600;">' . esc_html($subject) . '</p>
+                                    </td>
+                                </tr>
+
+                                <!-- Body -->
+                                <tr>
+                                    <td style="padding:32px;">
+                                        <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
+
+                                            <tr>
+                                                <td style="padding-bottom:16px; border-bottom:1px solid #eeeeee;">
+                                                    <p style="margin:0 0 4px; color:#999999; font-size:11px; text-transform:uppercase; letter-spacing:1px;">Name</p>
+                                                    <p style="margin:0; color:#1a1a1a; font-size:15px; font-weight:600;">' . esc_html($name) . '</p>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-bottom:16px; border-bottom:1px solid #eeeeee;">
+                                                    <p style="margin:0 0 4px; color:#999999; font-size:11px; text-transform:uppercase; letter-spacing:1px;">Email</p>
+                                                    <p style="margin:0; color:#1a1a1a; font-size:14px;">
+                                                        <a href="mailto:' . esc_attr($email) . '" style="color:#1a1a1a; text-decoration:none;">' . esc_html($email) . '</a>
+                                                    </p>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-bottom:16px; border-bottom:1px solid #eeeeee;">
+                                                    <p style="margin:0 0 4px; color:#999999; font-size:11px; text-transform:uppercase; letter-spacing:1px;">Mobile</p>
+                                                    <p style="margin:0; color:#1a1a1a; font-size:14px;">
+                                                        <a href="tel:' . esc_attr($mobile) . '" style="color:#1a1a1a; text-decoration:none;">' . esc_html($mobile) . '</a>
+                                                    </p>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-top:16px;">
+                                                    <p style="margin:0 0 8px; color:#999999; font-size:11px; text-transform:uppercase; letter-spacing:1px;">Message</p>
+                                                    <p style="margin:0; color:#333333; font-size:14px; line-height:1.6; background-color:#f9f7f4; padding:16px; border-radius:6px; border-left:3px solid #c9a875;">' . nl2br(esc_html($message)) . '</p>
+                                                </td>
+                                            </tr>
+
+                                        </table>
+                                    </td>
+                                </tr>
+
+                                <!-- CTA -->
+                                <tr>
+                                    <td style="padding:0 32px 32px;">
+                                        <a href="mailto:' . esc_attr($email) . '" style="display:inline-block; background-color:#1a1a1a; color:#ffffff; text-decoration:none; padding:12px 28px; border-radius:4px; font-size:13px; font-weight:600; letter-spacing:0.5px;">Reply to ' . esc_html($name) . '</a>
+                                    </td>
+                                </tr>
+
+                                <!-- Footer -->
+                                <tr>
+                                    <td style="background-color:#f9f7f4; padding:18px 32px; text-align:center;">
+                                        <p style="margin:0; color:#999999; font-size:11px;">This inquiry was submitted via the Homeland Infinia website contact form.</p>
+                                    </td>
+                                </tr>
+
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </body>
+        </html>';
+
+        $headers = array(
+            'Content-Type: text/html; charset=UTF-8',
+            'Reply-To: ' . $name . ' <' . $email . '>',
+        );
+
+        wp_mail($to, $email_subject, $email_body, $headers);
 
         wp_send_json_success(array('message' => 'Thank you! Your inquiry has been transmitted successfully.'));
     }
